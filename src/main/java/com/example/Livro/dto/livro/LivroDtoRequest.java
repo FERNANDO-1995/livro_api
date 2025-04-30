@@ -1,38 +1,38 @@
-package com.example.Livro.dto;
-
-import com.example.Livro.model.Autor;
-import com.example.Livro.model.Livro;
-import com.example.Livro.model.emum.GeneroLivro;
-import jakarta.persistence.*;
+package com.example.Livro.dto.livro;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
+
+import com.example.Livro.dto.autor.AutorDtoRequest;
+import com.example.Livro.model.Livro;
+import com.example.Livro.model.emum.GeneroLivro;
+import java.util.List;
 import java.util.stream.Collectors;
 
-public class LivroDto {
+public class LivroDtoRequest {
     private UUID id;
     private String isbn;
     private String titulo;
     private LocalDate dataPublicacao;
     private BigDecimal preco;
     private GeneroLivro generoLivro;
-    private AutorDto autorDto;
+    private AutorDtoRequest autorDto;
 
-    public LivroDto(Livro livro) {
+    
+
+    public LivroDtoRequest() {
+    }
+
+    public LivroDtoRequest(Livro livro) {
         this.id = livro.getId();
         this.isbn = livro.getIsbn();
         this.titulo = livro.getTitulo();
         this.dataPublicacao = livro.getDataPublicacao();
         this.preco = livro.getPreco();
         this.generoLivro = livro.getGeneroLivro();
-        this.autorDto = new AutorDto( livro.getAutor());
+        this.autorDto = new AutorDtoRequest( livro.getAutor());
     }
-
-
-
 
     public UUID getId() {
         return id;
@@ -82,15 +82,15 @@ public class LivroDto {
         this.generoLivro = generoLivro;
     }
 
-    public AutorDto getAutorDto() {
+    public AutorDtoRequest getAutorDto() {
         return autorDto;
     }
 
-    public void setAutorDto(AutorDto autorDto) {
+    public void setAutorDto(AutorDtoRequest autorDto) {
         this.autorDto = autorDto;
     }
 
-    public static List<LivroDto> converter(List<Livro> livros) {
-        return livros.stream().map(LivroDto::new).collect(Collectors.toList());
+    public static List<LivroDtoRequest> converter(List<Livro> livros) {
+        return livros.stream().map(LivroDtoRequest::new).collect(Collectors.toList());
     }
 }

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.example.Livro.dto.autor.AutorDtoRequest;
+
 @Entity
 @Table(name = "TB_AUTOR")
 public class Autor {
@@ -23,6 +25,17 @@ public class Autor {
     @OneToMany(mappedBy = "autor")
     private List<Livro> livros;
 
+  
+    public Autor() {
+    }
+
+    public Autor(AutorDtoRequest autorDtoRequest) {
+        this.id = autorDtoRequest.getId();
+        this.nome =autorDtoRequest.getNome();
+        this.dataNascimento =autorDtoRequest.getDataNascimento();
+        this.nacionalidade = autorDtoRequest.getNacionalidade();
+    }
+   
     public UUID getId() {
         return id;
     }
@@ -55,13 +68,7 @@ public class Autor {
         this.nacionalidade = nacionalidade;
     }
 
-    public List<Livro> getLivros() {
-        return livros;
-    }
-
-    public void setLivros(List<Livro> livros) {
-        this.livros = livros;
-    }
+    
 
     @Override
     public boolean equals(Object o) {
@@ -73,5 +80,13 @@ public class Autor {
     @Override
     public int hashCode() {
         return Objects.hash(id, nome);
+    }
+
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
     }
 }

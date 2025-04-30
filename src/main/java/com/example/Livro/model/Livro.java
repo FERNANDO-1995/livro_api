@@ -1,5 +1,8 @@
 package com.example.Livro.model;
 
+import com.example.Livro.dto.autor.AutorDtoRequest;
+import com.example.Livro.dto.livro.LivroDtoRequest;
+import com.example.Livro.dto.livro.LivroDtoResponse;
 import com.example.Livro.model.emum.GeneroLivro;
 import jakarta.persistence.*;
 
@@ -26,9 +29,23 @@ public class Livro {
     @Enumerated(EnumType.STRING)
     private GeneroLivro generoLivro;
 
-    @ManyToOne//(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL,)
     @JoinColumn(name = "autor_id")
     private Autor autor;
+
+
+    public Livro() {
+    }
+
+    public Livro(LivroDtoRequest dto) {
+        this.id =dto.getId();
+        this.isbn = dto.getIsbn();
+        this.titulo = dto.getTitulo();
+        this.dataPublicacao = dto.getDataPublicacao();
+        this.preco = dto.getPreco();
+        this.generoLivro = dto.getGeneroLivro();
+        this.autor = new Autor(dto.getAutorDto());
+    }
 
     public UUID getId() {
         return id;
@@ -93,4 +110,6 @@ public class Livro {
                 ", titulo='" + titulo + '\'' +
                 '}';
     }
+
+    
 }

@@ -1,6 +1,8 @@
 package com.example.Livro.service.impl;
 
-import com.example.Livro.dto.LivroDto;
+import com.example.Livro.dto.autor.AutorDtoRequest;
+import com.example.Livro.dto.livro.LivroDtoRequest;
+import com.example.Livro.dto.livro.LivroDtoResponse;
 import com.example.Livro.model.Livro;
 import com.example.Livro.repository.LivroRepository;
 import com.example.Livro.service.LivroService;
@@ -19,25 +21,26 @@ public class LivroServiceImp implements LivroService {
     }
 
     @Override
-    public List<LivroDto> findAll() {
-        return LivroDto.converter(livroRepository.findAll());
+    public List<LivroDtoRequest> findAll() {
+        return LivroDtoRequest.converter(livroRepository.findAll());
     }
 
     @Override
-    public LivroDto findById(UUID id) {
+    public LivroDtoRequest findById(UUID id) {
         Optional<Livro> livro = livroRepository.findById(id);
         Livro livro1 = livro.orElseThrow(() -> new IllegalArgumentException("Livro não encontrado"));
-        return new LivroDto(livro1);
+        return new LivroDtoRequest(livro1);
     }
 
     @Override
-    public LivroDto store(Livro livro) {
-        return new LivroDto(livroRepository.save(livro));
+    public LivroDtoRequest store(LivroDtoRequest livro) {
+       
+        return new LivroDtoRequest(livroRepository.save(new Livro(livro)));
     }
 
     @Override
-    public LivroDto update(Livro livro) {
-        return new LivroDto(livroRepository.save(livro));
+    public LivroDtoRequest update(LivroDtoRequest livro) {
+        return new LivroDtoRequest(livroRepository.save(new Livro(livro)));
     }
 
     @Override

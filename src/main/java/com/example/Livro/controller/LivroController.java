@@ -1,6 +1,7 @@
 package com.example.Livro.controller;
 
-import com.example.Livro.dto.LivroDto;
+import com.example.Livro.dto.livro.LivroDtoRequest;
+import com.example.Livro.dto.livro.LivroDtoResponse;
 import com.example.Livro.model.Livro;
 import com.example.Livro.service.LivroService;
 import org.springframework.http.HttpStatus;
@@ -20,12 +21,12 @@ public class LivroController {
     }
 
     @GetMapping
-    public List<LivroDto> index(){
+    public List<LivroDtoRequest> index(){
         return livroService.findAll();
         }
 
     @GetMapping("{id}")
-    public LivroDto index(@PathVariable("id")UUID id){
+    public LivroDtoRequest index(@PathVariable("id")UUID id){
         return livroService.findById(id);
     }
 
@@ -34,13 +35,13 @@ public class LivroController {
         return livroService.findByLivroAndAutor();
     }
     @PostMapping
-    public ResponseEntity<LivroDto> store(@RequestBody Livro livro){
+    public ResponseEntity<LivroDtoRequest> store(@RequestBody LivroDtoRequest livro){
 
         return ResponseEntity.status(HttpStatus.CREATED).body(livroService.store(livro));
     }
 
     @PutMapping
-    public ResponseEntity<LivroDto> update(@RequestBody Livro livro){
+    public ResponseEntity<LivroDtoRequest> update(@RequestBody LivroDtoRequest livro){
         return ResponseEntity.status(HttpStatus.CREATED).body(livroService.update(livro));
     }
 
