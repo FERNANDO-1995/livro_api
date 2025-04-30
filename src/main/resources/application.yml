@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Livro
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+    initialize: true
+    schema: classpath:/PopularDados.sql
+    data: classpath:/PopularDados.sql
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    h2:
+      console:
+        enabled: true
+        path: /h2-console
