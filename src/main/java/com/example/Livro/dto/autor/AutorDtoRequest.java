@@ -1,5 +1,6 @@
 package com.example.Livro.dto.autor;
 
+import com.example.Livro.dto.livro.LivroDtoResponse;
 import com.example.Livro.model.Autor;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,11 +26,6 @@ public class AutorDtoRequest {
         this.dataNascimento = autor.getDataNascimento();
         this.nacionalidade = autor.getNacionalidade();
     }
-    
-    
-
-
-
     public UUID getId() {
         return id;
     }
